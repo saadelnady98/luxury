@@ -51,8 +51,7 @@ const ProjectCard = memo(({
           <Image
             src={product?.image?.original_url}
             alt={product?.image?.file_name || product?.title}
-            width={400}
-            height={300}
+            fill
             className="w-full h-full object-cover group-hover:scale-125 duration-700 will-change-transform"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 300px"
             // placeholder="blur"
