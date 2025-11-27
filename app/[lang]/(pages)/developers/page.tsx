@@ -40,10 +40,11 @@ const Developers = async ({ params: { lang } }: DevelopersProps_TP) => {
                             <div className="w-full h-28 md:h-44 overflow-hidden bg-mainGray bg-opacity-20 flex justify-center items-center">
                                 <Image
                                     src={developer?.image?.original_url}
-                                    width={1200}
-                                    height={600}
-                                     placeholder="blur"
-                                    blurDataURL={IMAGE_BLUR}
+                                    width={600}
+                                    height={500}
+                                    loading="eager"
+                                    //  placeholder="blur"
+                                    // blurDataURL={IMAGE_BLUR}
                                     alt="community"
                                     className="object-cover object-center p-4 xl:p-8 w-1/3 lg:w-1/2"
                                     key={developer}

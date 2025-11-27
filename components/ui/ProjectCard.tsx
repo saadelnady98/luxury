@@ -59,8 +59,7 @@ const ProjectCard = memo(
               height={500}
               className="w-full h-full object-cover group-hover:scale-125 duration-700 will-change-transform"
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 300px"
-              // placeholder="blur"
-              // blurDataURL={IMAGE_BLUR}
+             
               quality={75}
             />
           </div>

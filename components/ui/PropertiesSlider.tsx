@@ -54,7 +54,7 @@ export default function PropertiesSlider({ propertyImages }) {
               alt={image?.file_name}
               width={721} 
               height={993}
-              quality={85}
+              quality={70}
               priority
               sizes="(max-width: 768px) 100vw, 721px"
               className={`object-cover w-full min-h-[560px] transition-opacity duration-500 ${

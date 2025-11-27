@@ -34,7 +34,7 @@
           </p>
         ) : null} */}
         <Link
-          href={`${lang}/agents`}
+          href={`/agents`}
           className="flex flex-col items-center gap-2"
         >
           {showImage && (
