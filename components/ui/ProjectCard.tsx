@@ -25,7 +25,6 @@ const ProjectCard = memo(
     const { lang } = useCurrentLang();
     const locale = dictionary[lang!];
     const pathname = usePathname();
-    console.log("product >>>", product);
 
     const isInCommunity = useMemo(
       () => pathname.includes("communities"),

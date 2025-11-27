@@ -1,22 +1,29 @@
+"use client";
 import clsx from "clsx";
 import { Community_TP } from "community";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./CommunityCard.module.scss";
 import FadeY from "@/components/ui/motion-elements/FadeY";
-import { IMAGE_BLUR } from "@/components/constant/image-blure";
 import { images } from "@/utils/exportsImages";
+import { useState } from "react";
+
 interface CommunityCardProps {
   community?: Community_TP;
   lang?: string;
   index?: number;
 }
 
+const shimmer =
+  "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.6s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent";
+
 const CommunityCard: React.FC<CommunityCardProps> = ({
   community,
   lang,
   index,
 }) => {
+  const [loaded, setLoaded] = useState(false);
+
   const colSpan8Indices = [
     0, 3, 4, 7, 8, 11, 12, 15, 16, 19, 20, 23, 24, 27, 28, 31, 32, 35, 36, 39,
     40, 43, 44, 47, 48, 51, 52, 55, 56, 59, 60, 63, 64, 67, 68, 71, 72, 75, 76,
@@ -34,8 +41,10 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
     412, 415, 416, 419, 420, 423, 424, 427, 428, 431, 432, 435, 436, 439, 440,
     443, 444, 447, 448, 451, 452, 455, 456, 459, 460, 463, 464, 467, 468, 471,
     472, 475, 476, 479, 480, 483, 484, 487, 488, 491, 492, 495, 496, 499, 500,
-  ]; // i do not have solution for it please forgive me for this bad scenario
+  ];
+
   const isColSpan8 = colSpan8Indices.includes(community?.index!) ? 1 : 0;
+
   const classes = clsx({
     "text-center relative overflow-hidden group flex justify-center items-center":
       true,
@@ -44,6 +53,7 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
   });
 
   if (!community) return null;
+
   return (
     <FadeY
       dir="top"
@@ -53,20 +63,30 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
     >
       <Link
         href={`/${lang}/communities/${community?.slug}`}
-        className="w-full lg:h-[446px]"
+        className="w-full lg:h-[446px] relative block"
       >
+        {/* Shimmer Skeleton */}
+        {!loaded && (
+          <div
+            className={`absolute inset-0 bg-gray-300/30 rounded-md overflow-hidden ${shimmer}`}
+          ></div>
+        )}
+
+        {/* IMAGE */}
         <Image
-          className="w-full h-full bg-white object-cover"
+          className={`w-full h-full object-cover rounded-md transition-opacity duration-500 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
           src={community?.image?.original_url ?? images.bru1}
           alt={community?.image?.file_name}
           width={600}
           height={400}
           quality={85}
-          priority={true}
-          // placeholder="blur"
-          // blurDataURL={IMAGE_BLUR}
+          priority
+          onLoadingComplete={() => setLoaded(true)}
         />
-        <p className="group-hover:bottom-1/2 duration-500  group-hover:translate-y-1/2 absolute  text-2xl text-textColor bottom-4 left-1/2 -translate-x-1/2">
+
+        <p className="group-hover:bottom-1/2 duration-500 group-hover:translate-y-1/2 absolute text-2xl text-textColor bottom-4 left-1/2 -translate-x-1/2">
           {community?.name}
         </p>
       </Link>
