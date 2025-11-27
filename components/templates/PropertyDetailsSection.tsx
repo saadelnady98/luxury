@@ -151,8 +151,8 @@ const PropertyDetailsSection: React.FC<PropertyDetailsSectionProps> = ({
                 loading="lazy"
               />
               <span className="text-sm md:text-base">
-                {propertyData?.details?.min_size} : {propertyData?.details?.max_size}{" "}
-                {locale?.perSqft}
+                {propertyData?.details?.min_size} :{" "}
+                {propertyData?.details?.max_size} {locale?.perSqft}
               </span>
             </div>
 
@@ -169,7 +169,8 @@ const PropertyDetailsSection: React.FC<PropertyDetailsSectionProps> = ({
                 loading="lazy"
               />
               <span className="text-sm md:text-base">
-                {propertyData?.details?.min_bathroom} : {propertyData?.details?.max_bathroom}
+                {propertyData?.details?.min_bathroom} :{" "}
+                {propertyData?.details?.max_bathroom}
               </span>
             </div>
 
@@ -186,7 +187,8 @@ const PropertyDetailsSection: React.FC<PropertyDetailsSectionProps> = ({
                 loading="lazy"
               />
               <span className="text-sm md:text-base">
-                {propertyData?.details?.min_bedroom} : {propertyData?.details?.max_bedroom}
+                {propertyData?.details?.min_bedroom} :{" "}
+                {propertyData?.details?.max_bedroom}
               </span>
             </div>
           </div>
@@ -200,7 +202,9 @@ const PropertyDetailsSection: React.FC<PropertyDetailsSectionProps> = ({
 
         {/* description */}
         <div>
-          <p className="text-xl md:text-2xl lg:text-4xl pb-6">{locale?.description}</p>
+          <p className="text-xl md:text-2xl lg:text-4xl pb-6">
+            {locale?.description}
+          </p>
           <div className="text-mainGray text-sm sm:text-base md:text-lg lg:text-xl lg:leading-10 flex flex-col gap-4">
             <p
               className="line-clamp-[12] lg:line-clamp-none"
@@ -258,7 +262,6 @@ const PropertyDetailsSection: React.FC<PropertyDetailsSectionProps> = ({
               blurDataURL={IMAGE_BLUR}
               sizes="(max-width: 768px) 200px, 300px"
               loading="lazy"
-               
             />
           </Link>
         )}
