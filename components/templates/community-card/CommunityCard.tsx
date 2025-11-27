@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./CommunityCard.module.scss";
 import FadeY from "@/components/ui/motion-elements/FadeY";
 import { IMAGE_BLUR } from "@/components/constant/image-blure";
+import { images } from "@/utils/exportsImages";
 interface CommunityCardProps {
   community?: Community_TP;
   lang?: string;
@@ -56,14 +57,14 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
       >
         <Image
           className="w-full h-full bg-white object-cover"
-          src={community?.image?.original_url}
+          src={community?.image?.original_url ?? images.bru1}
           alt={community?.image?.file_name}
           width={600}
           height={400}
           quality={85}
           priority={true}
-          placeholder="blur"
-          blurDataURL={IMAGE_BLUR}
+          // placeholder="blur"
+          // blurDataURL={IMAGE_BLUR}
         />
         <p className="group-hover:bottom-1/2 duration-500  group-hover:translate-y-1/2 absolute  text-2xl text-textColor bottom-4 left-1/2 -translate-x-1/2">
           {community?.name}

@@ -264,3 +264,8 @@ input[type="radio"] {
 .css-1dimb5e-singleValue {
     color: #fcd1ba !important;
 }
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

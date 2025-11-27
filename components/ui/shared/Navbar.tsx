@@ -50,8 +50,9 @@ const Navbar = () => {
                             className="h-14 w-14"
                             src={images.Logo}
                             alt={images.Logo}
-                             placeholder="blur"
-                            blurDataURL={IMAGE_BLUR}
+                            quality={90}
+                            //  placeholder="blur"
+                            // blurDataURL={IMAGE_BLUR}
                             width={400}
                             height={400}
                         />
