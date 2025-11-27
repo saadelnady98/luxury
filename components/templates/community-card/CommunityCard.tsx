@@ -68,21 +68,20 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
         {/* Shimmer Skeleton */}
         {!loaded && (
           <div
-            className={`absolute inset-0 bg-gray-300/30 rounded-md overflow-hidden ${shimmer}`}
+            className={`absolute inset-0 bg-gray-300/30  overflow-hidden ${shimmer}`}
           ></div>
         )}
 
         {/* IMAGE */}
         <Image
-          className={`w-full h-full object-cover rounded-md transition-opacity duration-500 ${
+          className={`w-full h-full object-cover  transition-opacity duration-500 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
           src={community?.image?.original_url ?? images.bru1}
           alt={community?.image?.file_name}
           width={600}
-          height={400}
+          height={300}
           quality={85}
-          priority
           onLoadingComplete={() => setLoaded(true)}
         />
 

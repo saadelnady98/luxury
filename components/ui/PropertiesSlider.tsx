@@ -43,20 +43,20 @@ export default function PropertiesSlider({ propertyImages }) {
 
         return (
           <SwiperSlide key={image?.id} className="mx-auto relative">
-            {/* Skeleton shimmer (same style as ProjectCardSkeleton) */}
             {!loaded && (
               <div
-                className={`relative overflow-hidden w-full min-h-[560px] bg-gray-300/30  ${shimmer}`}
+                className={`relative overflow-hidden w-full min-h-[560px] bg-gray-300/30 ${shimmer}`}
               ></div>
             )}
 
             <Image
               src={image?.original_url}
               alt={image?.file_name}
-              width={800}
-              height={600}
-              quality={70}
+              width={721} 
+              height={993}
+              quality={80}
               priority
+              sizes="(max-width: 768px) 100vw, 721px"
               className={`object-cover w-full min-h-[560px] transition-opacity duration-500 ${
                 loaded ? "opacity-100" : "opacity-0"
               }`}
