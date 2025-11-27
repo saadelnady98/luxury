@@ -9,6 +9,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { images } from "@/utils/exportsImages";
 
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.6s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent";
@@ -50,10 +51,10 @@ export default function PropertiesSlider({ propertyImages }) {
             )}
 
             <Image
-              src={image?.original_url}
+              src={image?.original_url ?? images.bru0}
               alt={image?.file_name}
-              width={721} 
-              height={993}
+              width={600}
+              height={500}
               quality={70}
               priority
               sizes="(max-width: 768px) 100vw, 721px"
