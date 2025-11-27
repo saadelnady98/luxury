@@ -8,6 +8,7 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import ProjectCardSkeleton from "@/components/ui/ProjectCardSkeleton";
 import Loader from "@/components/ui/loader/Loader";
 import { dictionary } from "@/dictionaries/clientContent";
+import { getServerDictionary } from "@/lib/dictionary";
 import { images } from "@/utils/exportsImages";
 import { getData } from "@/utils/fetchData";
 import { usePathname } from "next/navigation";
@@ -43,6 +44,7 @@ const Community = ({ params: { slug } }: CommunityProps_TP) => {
   const lastSegment = pathSegments[pathSegments.length - 1];
   const { lang } = useCurrentLang();
   const locale = dictionary[lang!];
+ 
   const [amenity, setAmenity] = useState<string[]>([]);
   const [propertyType, setPropertyType] = useState<string[]>([]);
   const [params, setParams] = useState("");
@@ -179,14 +181,15 @@ const Community = ({ params: { slug } }: CommunityProps_TP) => {
               hide={hide}
               setHide={setHide}
             />
-            <div className="grid xl:grid-cols-3 lg:grid-cols-2 px-4 lg:px-8 gap-8 mt-4 lg:mt-8 min-h-[300px]">
+            <div className="grid xl:grid-cols-3 lg:grid-cols-2 px-4 lg:px-8 gap-8 mt-4 lg:mt-8">
               {loading
                 ? Array.from({ length: 6 }).map((_, index) => (
                     <div className="bg-[#171717] p-8" key={index}>
                       <ProjectCardSkeleton />
                     </div>
                   ))
-                : productsData?.data?.map((product: any) => (
+                : productsData?.data?.length
+                ? productsData.data.map((product: any) => (
                     <div className="bg-[#171717] p-8" key={product.id}>
                       <ProjectCard
                         product={product}
@@ -194,17 +197,25 @@ const Community = ({ params: { slug } }: CommunityProps_TP) => {
                         separator
                       />
                     </div>
-                  ))}
+                  ))
+                : null}
             </div>
 
-            {!loading && productsData?.data?.length > 1 && (
-              <PaginationButtons
-                locale={locale}
-                pages={Math.ceil(productsData?.pagination?.total / 4)}
-                setPage={setPage}
-                currentPage={page}
-              />
+            {!loading && productsData?.data?.length === 0 && (
+              <div className="text-4xl text-center p-5 ">
+                {locale.noResultFound}
+              </div>
             )}
+            {!loading &&
+              productsData?.data?.length > 0 &&
+              Math.ceil(productsData?.pagination?.total / 10) > 1 && (
+                <PaginationButtons
+                  locale={locale}
+                  pages={Math.ceil(productsData?.pagination?.total / 10)}
+                  setPage={setPage}
+                  currentPage={page}
+                />
+              )}
           </div>
         </div>
       )}

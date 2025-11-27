@@ -2,6 +2,8 @@
 import { getData } from "@/utils/fetchData";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import useCurrentLang from "../hooks/useCurrentLang";
+import { dictionary } from "@/dictionaries/clientContent";
 type PropertyTypeFilterBar_TP = {
   setPropertyType: React.Dispatch<React.SetStateAction<string[]>>;
   reset: boolean;
@@ -11,8 +13,11 @@ const PropertyTypeFilterBar = ({
   reset,
 }: PropertyTypeFilterBar_TP) => {
   const [propertyTypes, setPropertyTypes] = useState([]);
-  const [selectedPropertyType, setSelectedPropertyType] = useState<number[]>([]);
-
+  const [selectedPropertyType, setSelectedPropertyType] = useState<number[]>(
+    []
+  );
+  const { lang } = useCurrentLang();
+  const locale = dictionary[lang!];
   const getCategories = async () => {
     const data = await getData({
       endpoint: "api/type",
@@ -45,20 +50,22 @@ const PropertyTypeFilterBar = ({
   }, [reset]);
   if (!propertyTypes) return null;
   return (
-    <ul className="flex lg:gap-x-4 gap-y-2 md:w-auto w-full mx-auto col-span-5 overflow-scroll md:overflow-hidden">
+    <ul className="flex lg:gap-x-4 gap-y-2 md:w-auto w-full mx-auto col-span-5 overflow-scroll md:overflow-hidden justify-center">
       {propertyTypes?.map((propertyType: any, index) => (
         <li
           className={clsx({
-            " hover:bg-mainColor p-2 text-sm duration-200 h-fit whitespace-nowrap": true,
+            " hover:bg-mainColor p-2 text-sm duration-200 h-fit whitespace-nowrap":
+              true,
             "!bg-mainColor": selectedPropertyType?.includes(index),
-
           })}
-          key={propertyType.id}>
+          key={propertyType.id}
+        >
           <button
             type="button"
             value={propertyType.id}
-            onClick={() => handlePropertyTypeClick(propertyType, index)}>
-            {propertyType?.name}
+            onClick={() => handlePropertyTypeClick(propertyType, index)}
+          >
+            {locale?.[propertyType?.name]}
           </button>
         </li>
       ))}
